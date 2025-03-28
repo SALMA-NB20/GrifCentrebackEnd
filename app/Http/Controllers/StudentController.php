@@ -11,7 +11,7 @@ class StudentController extends Controller
     public function create()
     {
         $classes = Classe::all();
-        return view('admin.students.create', compact('classes'));
+        return view('students.create', compact('classes'));
     }
 
     public function store(Request $request)

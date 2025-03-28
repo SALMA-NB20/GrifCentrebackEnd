@@ -16,14 +16,24 @@ Route::get('/', function () {
 });
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [LoginController::class, 'login'])->name('login.post');
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('/login', [LoginController::class, 'login']);
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('students.index');
+    })->name('dashboard');
+    
+    Route::get('/students/create', [StudentController::class, 'create'])->name('student.create');
+    Route::post('/students', [StudentController::class, 'store'])->name('students.store');
+    Route::get('/students', [StudentController::class, 'index'])->name('students.index');
+});
 
 // Admin Routes with middleware
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+        return redirect()->route('students.index');
+    });
     
     // Student Routes
     Route::controller(StudentController::class)->prefix('students')->group(function () {

@@ -113,38 +113,43 @@
             margin-left: 200px;
             padding: 1rem;
         }
-        .absences-section {
-            background: #b0b8c1;
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin: 1rem auto;
-            max-width: 800px;
-        }
-        .absences-title {
-            color: white;
-            margin-bottom: 1rem;
-        }
-        .absences-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            background: white;
-            padding: 1rem;
-            border-radius: 8px;
-        }
-        .absence-header {
-            background: #666;
-            color: white;
-            padding: 0.5rem;
-            text-align: center;
-            border-radius: 5px;
-        }
-        .absence-cell {
-            background: #f0f0f0;
-            padding: 0.5rem;
-            text-align: center;
-            border-radius: 5px;
-        }
+        <!-- Add these styles to your existing style section -->
+        <style>
+            .table-section {
+                background: #b0b8c1;
+                border-radius: 10px;
+                padding: 1.5rem;
+                margin: 1rem auto;
+                max-width: 800px;
+            }
+            .table-title {
+                color: white;
+                margin-bottom: 1rem;
+                font-size: 1.2rem;
+            }
+            .data-table {
+                width: 100%;
+                background: white;
+                border-radius: 8px;
+                overflow: hidden;
+            }
+            .table-header {
+                background: #666;
+                color: white;
+                text-align: center;
+                padding: 0.8rem;
+            }
+            .table-cell {
+                padding: 0.8rem;
+                text-align: center;
+                background: #f0f0f0;
+                border-bottom: 1px solid #ddd;
+            }
+            .scroll-container {
+                max-height: 200px;
+                overflow-y: auto;
+            }
+        </style>
     </style>
 </head>
 <body>
@@ -191,17 +196,61 @@
             </div>
         </div>
 
-        <div class="absences-section">
-            <h3 class="absences-title">Etudiant Absences :</h3>
-            <div class="absences-grid">
-                <div class="absence-header">DATE</div>
-                <div class="absence-header">MATIER</div>
-                <div class="absence-cell">DEVELOPMENT</div>
-                <div class="absence-cell"></div>
-                <div class="absence-cell"></div>
-                <div class="absence-cell"></div>
-                <div class="absence-cell"></div>
-                <div class="absence-cell"></div>
+        <!-- Replace the existing absences section with this -->
+        <div class="table-section">
+            <h3 class="table-title">Etudiant Absences :</h3>
+            <div class="scroll-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th class="table-header">DATE</th>
+                            <th class="table-header">MATIER</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="table-cell">2024-01-15</td>
+                            <td class="table-cell">DEVELOPMENT</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">2024-01-16</td>
+                            <td class="table-cell">RESEAU</td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Add the payment table section -->
+        <div class="table-section">
+            <h3 class="table-title">Etudiant Paiment :</h3>
+            <div class="scroll-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th class="table-header">MATIER</th>
+                            <th class="table-header">MONTANT</th>
+                            <th class="table-header">DATE</th>
+                            <th class="table-header">STATUS PAIMENT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="table-cell">DEVELOPMENT</td>
+                            <td class="table-cell">1500 DH</td>
+                            <td class="table-cell">2024-01-15</td>
+                            <td class="table-cell">PAYÉ</td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">RESEAU</td>
+                            <td class="table-cell">1200 DH</td>
+                            <td class="table-cell">2024-01-20</td>
+                            <td class="table-cell">EN ATTENTE</td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
             </div>
         </div>
         @endforeach
