@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Classe;
 use App\Models\Student;
+use App\Models\Matiere;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -11,7 +12,8 @@ class StudentController extends Controller
     public function create()
     {
         $classes = Classe::all();
-        return view('students.create', compact('classes'));
+        $matieres = Matiere::all();
+        return view('students.create', compact('classes', 'matieres'));
     }
 
     public function store(Request $request)

@@ -168,21 +168,24 @@
 
             <div class="right-section">
                 <div class="matiers-section">
-                    <h3 class="section-title">Matiers :</h3>
+                    <h3 class="matiers-title">Matiers :</h3>
                     <div class="matiers-grid">
-                        <div class="matier-option">Francais</div>
-                        <div class="matier-option">DEVLOPPMENT</div>
-                        <div class="matier-option">Reseau</div>
-                        <div class="matier-option">Design</div>
+                        @foreach($matieres as $matiere)
+                            <div class="matier-option">{{ $matiere->name }}</div>
+                        @endforeach
                     </div>
-
-                    <h3 class="section-title">Classe :</h3>
-                    <select class="classe-select" name="classe">
+                    
+                    <h3 class="matiers-title">Classe :</h3>
+                    <select class="classe-select" name="classe_id" required>
                         <option value="">Box Option classe</option>
+                        @foreach($classes as $classe)
+                            <option value="{{ $classe->id }}">{{ $classe->name }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
         </div>
+
 
         <div class="submit-container">
             <span class="submit-text">AJOUTER</span>

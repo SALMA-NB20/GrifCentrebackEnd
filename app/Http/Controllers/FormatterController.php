@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Formatter;
+use App\Models\Matiere;
+use App\Models\Classe;
 use Illuminate\Http\Request;
 
 class FormatterController extends Controller
@@ -15,50 +17,28 @@ class FormatterController extends Controller
 
     public function create()
     {
-        return view('formateurs.create');
+        $matieres = Matiere::all();
+        $classes = Classe::all();
+        return view('formateurs.create', compact('matieres', 'classes'));
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'cin' => 'required|unique:formatters',
-            'nom' => 'required',
-            'prenom' => 'required',
-            'phone' => 'required',
+            'nom' => 'required|string',
+            'prenom' => 'required|string',
+            'phone' => 'required|string',
+            'cin' => 'required|string|unique:formatters',
             'email' => 'required|email|unique:formatters',
             'password' => 'required|min:6',
-            'address' => 'nullable',
-            'speciality' => 'nullable'
+            'classe_id' => 'required|exists:classes,id'
         ]);
 
+        $validated['password'] = bcrypt($validated['password']);
+        
         Formatter::create($validated);
-        return redirect()->route('professors.index')->with('success', 'Formateur added successfully');
-    }
 
-    public function edit(Formatter $formatter)
-    {
-        return view('formateurs.edit', compact('formatter'));
-    }
-
-    public function update(Request $request, Formatter $formatter)
-    {
-        $validated = $request->validate([
-            'cin' => 'required|unique:formatters,cin,' . $formatter->id,
-            'nom' => 'required',
-            'prenom' => 'required',
-            'phone' => 'required',
-            'email' => 'required|email|unique:formatters,email,' . $formatter->id,
-            'address' => 'nullable',
-            'speciality' => 'nullable'
-        ]);
-
-        $formatter->update($validated);
-        return redirect()->route('professors.index')->with('success', 'Formateur updated successfully');
-    }
-
-    public function destroy(Formatter $formatter)
-    {
-        $formatter->delete();
-        return redirect()->route('professors.index')->with('success', 'Formateur deleted successfully');
+        return redirect()->route('formateurs.index')
+            ->with('success', 'Formateur ajouté avec succès');
     }
 }

@@ -187,10 +187,9 @@
                     <div class="matiers-section">
                         <h3 class="matiers-title">Matiers :</h3>
                         <div class="matiers-grid">
-                            <div class="matier-option">Francais</div>
-                            <div class="matier-option">Arabe</div>
-                            <div class="matier-option">Developpment</div>
-                            <div class="matier-option">Reseau</div>
+                            @foreach($matieres as $matiere)
+                                <div class="matier-option">{{ $matiere->name }}</div>
+                            @endforeach
                         </div>
 
                         <h3 class="matiers-title">Classe :</h3>

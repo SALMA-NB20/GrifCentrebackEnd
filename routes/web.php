@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
 
+
 // Authentication Routes
 Route::get('/', function () {
     return redirect()->route('login');
@@ -88,4 +89,6 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 Route::fallback(function () {
     return response()->view('errors.404', [], 404);
 });
+
+Route::resource('formateurs', FormatterController::class);
 
