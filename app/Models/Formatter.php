@@ -7,13 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Formatter extends Model
 {
     protected $fillable = [
-        'cin',
         'nom',
         'prenom',
         'phone',
+        'cin',
         'email',
+        'password'
+    ];
+
+    protected $hidden = [
         'password',
-        'address',
-        'speciality'
     ];
 }

@@ -17,31 +17,22 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'date_inscription' => 'required|date',
-            'cin' => 'required|string|unique:students',
             'nom' => 'required|string',
             'prenom' => 'required|string',
-            'email' => 'required|email|unique:students',
             'phone' => 'required|string',
-            'classe_id' => 'required|exists:classes,id',
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+            'cin' => 'required|string|unique:students',
+            'date_inscription' => 'required|date',
+            'email' => 'required|email|unique:students',
+            'password' => 'required|min:6',
+            'classe_id' => 'required|exists:classes,id'
         ]);
     
-        $imagePath = $request->file('image')->store('students', 'public');
-        
-        Student::create([
-            'date_inscription' => $validated['date_inscription'],
-            'cin' => $validated['cin'],
-            'nom' => $validated['nom'],
-            'prenom' => $validated['prenom'],
-            'email' => $validated['email'],
-            'phone' => $validated['phone'],
-            'classe_id' => $validated['classe_id'],
-            'image' => $imagePath
-        ]);
+        $validated['password'] = bcrypt($validated['password']);
+    
+        Student::create($validated);
     
         return redirect()->route('students.index')
-            ->with('success', 'Student added successfully');
+            ->with('success', 'Étudiant ajouté avec succès');
     }
 
     public function index()

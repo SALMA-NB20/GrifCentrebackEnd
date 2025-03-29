@@ -10,17 +10,8 @@ class Student extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'email',
-        'phone',
-        'address',
-        'class_id',
-        'status'
-    ];
-
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime'
+        'nom', 'prenom', 'phone', 'cin', 'date_inscription', 
+        'email', 'password', 'classe_id'
     ];
 
     public function class()

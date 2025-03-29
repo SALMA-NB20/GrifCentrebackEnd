@@ -10,6 +10,6 @@ class Classe extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'name', 'capacity'
     ];
 }
